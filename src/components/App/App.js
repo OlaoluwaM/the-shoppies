@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import Search from '../MovieSearch/MovieSearch.js';
+import Loading from '../../reusables/Loading';
+import themeContext from '../../context/themeContext';
+
+import { ThemeProvider } from 'styled-components';
+import { Suspense, lazy } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
+import {
+  ExitFeature,
+  MotionConfig,
+  AnimatePresence,
+  GesturesFeature,
+  AnimationFeature,
+  AnimateLayoutFeature,
+} from 'framer-motion';
+
+const MovieSearch = lazy(() => import('../MovieSearch/MovieSearch.js'));
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={themeContext}>
+      <MotionConfig
+        features={[AnimateLayoutFeature, AnimationFeature, ExitFeature, GesturesFeature]}>
+        <Loading fullscreen={true} />
+        {/* <>
+          <AnimatePresence exitBeforeEnter initial={false}>
+            <Suspense fallback={<Loading fullscreen={true} />}>
+              <Switch location={location} key={location.pathname}>
+                <Route exact path="/">
+                  <MovieSearch />
+                </Route>
+
+                <Route path="/nominations">
+                  <Nomin
+                </Route>
+              </Switch>
+            </Suspense>
+          </AnimatePresence>
+        </> */}
+      </MotionConfig>
+    </ThemeProvider>
   );
 }
 
