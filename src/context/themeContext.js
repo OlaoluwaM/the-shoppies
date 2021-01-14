@@ -1,4 +1,4 @@
-export default themeContext = {
+const themeContext = {
   blackDark: '#000000',
   black: '#141414',
   blackLight: '#292929',
@@ -14,3 +14,5 @@ export default themeContext = {
 
   accentColor: '#247B7B',
 };
+
+export default themeContext;
