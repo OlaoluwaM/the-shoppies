@@ -1,9 +1,9 @@
-import Search from '../MovieSearch/MovieSearch.js';
+import NavBar from '../Nav/Nav';
 import Loading from '../../reusables/Loading';
 import themeContext from '../../context/themeContext';
 
 import { ThemeProvider } from 'styled-components';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import {
   ExitFeature,
@@ -14,31 +14,28 @@ import {
   AnimateLayoutFeature,
 } from 'framer-motion';
 
-const MovieSearch = lazy(() => import('../MovieSearch/MovieSearch.js'));
+const MoviesSearch = lazy(() => import('../MoviesView/MoviesView'));
 
 function App() {
   const location = useLocation();
+  const [applicationTheme, setTheme] = useState('dark');
 
   return (
-    <ThemeProvider theme={themeContext}>
+    <ThemeProvider theme={themeContext[applicationTheme]}>
       <MotionConfig
         features={[AnimateLayoutFeature, AnimationFeature, ExitFeature, GesturesFeature]}>
-        <Loading fullscreen={true} />
-        {/* <>
-          <AnimatePresence exitBeforeEnter initial={false}>
-            <Suspense fallback={<Loading fullscreen={true} />}>
-              <Switch location={location} key={location.pathname}>
-                <Route exact path="/">
-                  <MovieSearch />
-                </Route>
-
-                <Route path="/nominations">
-                  <Nomin
-                </Route>
-              </Switch>
-            </Suspense>
-          </AnimatePresence>
-        </> */}
+        <NavBar />
+        <>
+          {/* <AnimatePresence exitBeforeEnter initial={false}> */}
+          <Suspense fallback={<Loading fullscreen={true} />}>
+            <Switch location={location} key={location.pathname}>
+              <Route exact path="/">
+                <MoviesSearch />
+              </Route>
+            </Switch>
+          </Suspense>
+          {/* </AnimatePresence> */}
+        </>
       </MotionConfig>
     </ThemeProvider>
   );
