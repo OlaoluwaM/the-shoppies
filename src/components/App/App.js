@@ -26,7 +26,6 @@ function App() {
         features={[AnimateLayoutFeature, AnimationFeature, ExitFeature, GesturesFeature]}>
         <NavBar />
         <>
-          {/* <AnimatePresence exitBeforeEnter initial={false}> */}
           <Suspense fallback={<Loading fullscreen={true} />}>
             <Switch location={location} key={location.pathname}>
               <Route exact path="/">
@@ -34,7 +33,6 @@ function App() {
               </Route>
             </Switch>
           </Suspense>
-          {/* </AnimatePresence> */}
         </>
       </MotionConfig>
     </ThemeProvider>
