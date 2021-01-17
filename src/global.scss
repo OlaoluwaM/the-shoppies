@@ -25,8 +25,7 @@ $colorPalette: (
   greyLight: #e0e0e0,
   grey: #c4c9cb,
   greyDark: #a9b0b2,
-  baseColor: #ddbb55,
-  accentColor: #247b7b,
+  baseColor: #247b7b,
 );
 
 :root {
@@ -82,7 +81,7 @@ section.section-container {
   @return map-get($map: $colorPalette, $key: $color);
 }
 
-@each $color in (black, baseColor, accentColor) {
+@each $color in (black, baseColor) {
   .button-#{$color} {
     background: change-color(get-color($color), $alpha: 0.2);
     color: get-color($color);

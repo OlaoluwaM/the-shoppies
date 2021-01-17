@@ -68,8 +68,8 @@ section.section-container {
 }
 
 .button-baseColor {
-  background: rgba(221, 187, 85, 0.2);
-  color: #ddbb55;
+  background: rgba(36, 123, 123, 0.2);
+  color: #247b7b;
   -webkit-transition: background 0.3s ease, color 0.3s ease, scale 0.7s linear;
   transition: background 0.3s ease, color 0.3s ease, scale 0.7s linear;
 }
@@ -81,23 +81,6 @@ section.section-container {
 }
 
 .button-baseColor:active, .button-baseColor:hover, .button-baseColor:focus, .button-baseColor:focus-within {
-  background: #ddbb55;
-}
-
-.button-accentColor {
-  background: rgba(36, 123, 123, 0.2);
-  color: #247b7b;
-  -webkit-transition: background 0.3s ease, color 0.3s ease, scale 0.7s linear;
-  transition: background 0.3s ease, color 0.3s ease, scale 0.7s linear;
-}
-
-.button-accentColor:disabled {
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
-  pointer-events: none;
-}
-
-.button-accentColor:active, .button-accentColor:hover, .button-accentColor:focus, .button-accentColor:focus-within {
   background: #247b7b;
 }
 
