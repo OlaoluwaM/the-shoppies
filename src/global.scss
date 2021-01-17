@@ -1,3 +1,5 @@
+// TODO replace fonts
+
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 $fontWeights: (
@@ -18,13 +20,13 @@ $colorPalette: (
   blackDark: #000000,
   black: #141414,
   blackLight: #292929,
-  white: '#fffffe',
-  whiteDark: '#F5F5F5',
-  greyLight: '#E0E0E0',
-  grey: '#C4C9CB',
-  greyDark: '#A9B0B2',
-  baseColor: '#DDBB55',
-  accentColor: '#247B7B',
+  white: #fffffe,
+  whiteDark: #f5f5f5,
+  greyLight: #e0e0e0,
+  grey: #c4c9cb,
+  greyDark: #a9b0b2,
+  baseColor: #ddbb55,
+  accentColor: #247b7b,
 );
 
 :root {
@@ -38,10 +40,27 @@ $colorPalette: (
   --bold: 700;
   --xBold: 800;
   --xXBold: 900;
+  --base: 16px;
 }
 
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  height: 100vh;
+}
+
+html,
+body,
+#root,
+.section-container {
+  width: 100%;
+  position: relative;
+  background-color: map-get($map: $colorPalette, $key: black);
 }
 
 body {
@@ -52,4 +71,43 @@ body {
   font-family: $secondaryFont;
   font-weight: map-get($fontWeights, light);
   overflow-x: hidden;
+  color: map-get($map: $colorPalette, $key: whiteDark);
+}
+
+section.section-container {
+  height: calc(100% - 10%);
+}
+
+@function get-color($color) {
+  @return map-get($map: $colorPalette, $key: $color);
+}
+
+@each $color in (black, baseColor, accentColor) {
+  .button-#{$color} {
+    background: change-color(get-color($color), $alpha: 0.2);
+    color: get-color($color);
+    transition: background 0.3s ease, color 0.3s ease, scale 0.7s linear;
+
+    &:disabled {
+      filter: grayscale(1);
+      pointer-events: none;
+    }
+
+    &:active,
+    &:hover,
+    &:focus,
+    &:focus-within {
+      background: get-color($color);
+      color: get-color(background);
+    }
+  }
+}
+
+.base-button {
+  padding: 0.8em 0;
+  margin: 0 0 0.3em 0;
+  border: none;
+  width: calc(0.85 * 100%);
+  border-radius: 10px;
+  font-size: clamp(0.7rem, 4vmin, 1.2rem);
 }
