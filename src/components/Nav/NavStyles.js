@@ -52,6 +52,7 @@ export const LogoWrapper = styled(motion.li)`
 
   span {
     font-weight: var(--xXBold);
+    color: ${({ theme }) => theme.baseColor};
     flex-grow: 1;
     display: flex;
     align-items: center;
