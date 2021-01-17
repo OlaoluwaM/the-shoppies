@@ -11,9 +11,7 @@ const themeContext = {
     grey: '#C4C9CB',
     greyDark: '#A9B0B2',
 
-    baseColor: '#FFD61F',
-
-    accentColor: '#3C787E',
+    baseColor: '#3C787E',
   },
 };
 
