@@ -25,7 +25,7 @@ const variants = {
 
 const popcornVariants = {
   hidden: {
-    y: 20,
+    y: 10,
     opacity: 0,
     scale: 1,
   },
@@ -33,18 +33,15 @@ const popcornVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    scale: [1, 1.1, 1],
+    scale: [1, 1.15, 1],
     transition: {
       type: 'spring',
-      delay: 0.2,
-      scale: { repeat: Infinity, repeatType: 'mirror', delay: 0.5 },
+      scale: { repeat: Infinity, repeatType: 'mirror', delay: 0.3 },
     },
   },
 
   exit: {
     opacity: 0,
-    scale: 1,
-    y: 20,
   },
 };
 
@@ -81,7 +78,7 @@ const Overlay = styled(motion.div).attrs({
     isFullscreen
       ? css`
           position: fixed;
-          height: 100%;
+          height: inherit;
         `
       : css`
           position: absolute;
