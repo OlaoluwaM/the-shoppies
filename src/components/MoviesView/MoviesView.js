@@ -1,5 +1,6 @@
 import Loading from '../../reusables/Loading';
 import useFetch from '../../hooks/useFetch';
+import ErrorSVG from '../../reusables/Error';
 import PropTypes from 'prop-types';
 import MovieDisplay from '../MovieDisplay/MovieDisplay';
 import MovieSearchBar from './MovieSearchBar/SearchBar';
@@ -7,7 +8,12 @@ import MovieSearchBar from './MovieSearchBar/SearchBar';
 import { useState, useEffect, useRef } from 'react';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 import { generateRequestUrlObject, debounce, hasScrolledToBottom } from '../../utils/helpers';
-import { MoviesSearchContainer, MovieDisplayContainer, ResultInfo } from './MoviesViewStyles';
+import {
+  MoviesSearchContainer,
+  MovieDisplayContainer,
+  ResultInfo,
+  ErrorDisplayWrapper,
+} from './MoviesViewStyles';
 
 function SearchResults({ searchResultString, resultsShown, totalResults }) {
   return (
@@ -15,6 +21,15 @@ function SearchResults({ searchResultString, resultsShown, totalResults }) {
       {searchResultString}
       <span>{` ( ${resultsShown} out of ${totalResults} ) `}</span>
     </ResultInfo>
+  );
+}
+
+function ErrorDisplay({ message, layoutId, layout }) {
+  return (
+    <ErrorDisplayWrapper layoutId={layoutId} layout={layout}>
+      <ErrorSVG />
+      <h3>{message}</h3>
+    </ErrorDisplayWrapper>
   );
 }
 
@@ -77,22 +92,25 @@ export default function MoviesSearch() {
   }, [JSON.stringify(searchParams)]);
 
   let searchResultString;
-  if (!isInInitialState) {
+  if (!isInInitialState && !isLoading && newlyFetchedMovies) {
     searchResultString = `Showing results for "${searchParams[0][1]}"`;
   }
+  const hasError = !newlyFetchedMovies && !isLoading && error;
 
   return (
     <MoviesSearchContainer ref={sectionRef}>
       <MovieSearchBar setSearchQuery={setSearchParams} />
 
       <AnimateSharedLayout type="crossfade">
-        {searchResultString && (
-          <SearchResults
-            searchResultString={searchResultString}
-            resultsShown={movies.length}
-            totalResults={totalResultsRef.current}
-          />
-        )}
+        <AnimatePresence>
+          {searchResultString && !hasError && (
+            <SearchResults
+              searchResultString={searchResultString}
+              resultsShown={movies.length}
+              totalResults={totalResultsRef.current}
+            />
+          )}
+        </AnimatePresence>
 
         <MovieDisplayContainer layoutId="movie-display">
           {movies.map(({ Poster, Title, imdbID, Year }) => (
@@ -101,6 +119,10 @@ export default function MoviesSearch() {
         </MovieDisplayContainer>
 
         <AnimatePresence>
+          {hasError && (
+            <ErrorDisplay message={error.Error} layoutId="movie-display" layout="position" />
+          )}
+
           {isLoading && <Loading layoutId="movie-display" key="loader" fullscreen={true} />}
         </AnimatePresence>
       </AnimateSharedLayout>
