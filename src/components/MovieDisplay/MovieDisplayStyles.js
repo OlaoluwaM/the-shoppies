@@ -12,6 +12,7 @@ export const MovieDisplayContainer = styled(motion.div).attrs({
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  cursor: pointer;
 
   img,
   .default-poster {
