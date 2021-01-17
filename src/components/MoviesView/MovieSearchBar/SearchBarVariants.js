@@ -1,7 +1,7 @@
 export const searchBarVariant = {
   hidden: {
     opacity: 0,
-    y: 80,
+    y: 10,
   },
 
   visible: {
