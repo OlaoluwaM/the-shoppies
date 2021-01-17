@@ -29,3 +29,19 @@ export const resultsSpanInfoVariant = {
     opacity: 0,
   },
 };
+
+export const errorDisplayVariant = {
+  hidden: {
+    x: 10,
+    opacity: 0,
+  },
+
+  animate: {
+    x: 0,
+    opacity: 1,
+  },
+
+  exit: {
+    opacity: 0,
+  },
+};
