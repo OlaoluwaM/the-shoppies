@@ -77,7 +77,7 @@ export default function MoviesSearch() {
       return movieList;
     });
 
-    if (!initialState && pages > 1) toast.success('More results have been loaded');
+    if (!isInInitialState && pages > 1) toast.success('More results have been loaded');
   }, [JSON.stringify(newlyFetchedMovies)]);
 
   useEffect(() => {
