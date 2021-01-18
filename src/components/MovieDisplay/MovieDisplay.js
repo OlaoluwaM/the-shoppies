@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 
 import { default as NoImage } from '../../reusables/NoImage';
+import { default as NominationButton } from './NominationButton/NominationButton';
+import { isValidElement, cloneElement } from 'react';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { MovieDisplayContainer, MovieInfoWrapper } from './MovieDisplayStyles';
-import { m as motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion';
 
 function MoviePoster({ imageSrc, movieTitle }) {
   return (
@@ -16,6 +18,7 @@ function MoviePoster({ imageSrc, movieTitle }) {
           alt={movieTitle}
           layout
           key="image"
+          title={movieTitle}
         />
       ) : (
         <NoImage
@@ -31,17 +34,25 @@ function MoviePoster({ imageSrc, movieTitle }) {
     </AnimatePresence>
   );
 }
-export default function MovieDisplay({ poster, title, year }) {
+export default function MovieDisplay({ poster, title, year, imdbID, children }) {
   const imageSrc = poster.search('N/A') > -1 ? false : poster;
 
+  const movieData = { title, poster, year, imdbID };
+
   return (
-    <MovieDisplayContainer layout whileHover="hover">
+    <MovieDisplayContainer layout>
       <MoviePoster imageSrc={imageSrc} movieTitle={title} />
 
       <MovieInfoWrapper layout="position">
         <h4>{title}</h4>
         <p>{year}</p>
       </MovieInfoWrapper>
+
+      {isValidElement(children) ? (
+        cloneElement(children, { movieData })
+      ) : (
+        <NominationButton movieData={movieData} />
+      )}
     </MovieDisplayContainer>
   );
 }
@@ -50,6 +61,8 @@ MovieDisplay.propTypes = {
   poster: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
+  imdbID: PropTypes.string,
+  children: PropTypes.element, // I need it somewhere else, so for reusability sake
 };
 
 MoviePoster.propTypes = {
