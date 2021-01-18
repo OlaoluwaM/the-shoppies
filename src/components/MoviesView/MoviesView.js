@@ -6,15 +6,18 @@ import MovieDisplay from '../MovieDisplay/MovieDisplay';
 import MovieSearchBar from './MovieSearchBar/SearchBar';
 
 import { useState, useEffect, useRef } from 'react';
+import { generateRequestUrlObject, debounce } from '../../utils/helpers';
 import { AnimateSharedLayout, AnimatePresence } from 'framer-motion';
-import { generateRequestUrlObject, debounce, hasScrolledToBottom } from '../../utils/helpers';
 import {
-  MoviesSearchContainer,
-  MovieDisplayContainer,
   ResultInfo,
   ErrorDisplayWrapper,
+  MoviesSearchContainer,
+  MovieDisplayContainer,
 } from './MoviesViewStyles';
 
+function hasScrolledToBottom(element = document) {
+  return window.innerHeight + window.scrollY >= element.offsetHeight - 1500;
+}
 function SearchResults({ searchResultString, resultsShown, totalResults }) {
   return (
     <ResultInfo>
@@ -114,7 +117,13 @@ export default function MoviesSearch() {
 
         <MovieDisplayContainer layoutId="movie-display">
           {movies.map(({ Poster, Title, imdbID, Year }) => (
-            <MovieDisplay poster={Poster} title={Title} year={parseInt(Year)} key={imdbID} />
+            <MovieDisplay
+              poster={Poster}
+              title={Title}
+              year={parseInt(Year)}
+              key={imdbID}
+              imdbID={imdbID}
+            />
           ))}
         </MovieDisplayContainer>
 
@@ -134,4 +143,8 @@ SearchResults.propTypes = {
   searchResultString: PropTypes.string.isRequired,
   totalResults: PropTypes.number.isRequired,
   resultsShown: PropTypes.number.isRequired,
+};
+
+ErrorDisplay.propTypes = {
+  message: PropTypes.string.isRequired,
 };
