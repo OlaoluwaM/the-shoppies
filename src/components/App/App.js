@@ -49,7 +49,7 @@ export default function App() {
       <MotionConfig
         features={[AnimateLayoutFeature, AnimationFeature, ExitFeature, GesturesFeature]}>
         <Toaster
-          position="top-right"
+          position="bottom-right"
           reverseOrder={false}
           toastOptions={{
             className: 'toast',
