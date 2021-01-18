@@ -20,12 +20,13 @@ $colorPalette: (
   blackDark: #000000,
   black: #141414,
   blackLight: #292929,
-  white: #fffffe,
+  whiteLight: #ffffff,
+  white: #ebebeb,
   whiteDark: #f5f5f5,
   greyLight: #e0e0e0,
   grey: #c4c9cb,
   greyDark: #a9b0b2,
-  baseColor: #247b7b,
+  baseColor: #197278,
 );
 
 :root {
@@ -40,6 +41,7 @@ $colorPalette: (
   --xBold: 800;
   --xXBold: 900;
   --base: 16px;
+  --theme: 'dark';
 }
 
 * {
@@ -109,4 +111,11 @@ section.section-container {
   width: calc(0.85 * 100%);
   border-radius: 10px;
   font-size: clamp(0.7rem, 4vmin, 1.2rem);
+}
+
+.toast {
+  background: change-color(get-color(blackDark), $lightness: 5%);
+  color: change-color(get-color(whiteDark), $alpha: 0.7);
+  font-family: var(--secondaryFont);
+  font-weight: var(--regular);
 }
