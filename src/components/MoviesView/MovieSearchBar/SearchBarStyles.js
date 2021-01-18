@@ -11,7 +11,7 @@ export const SearchWrapper = styled(motion.div).attrs({
   exit: 'exit',
 })`
   width: 50%;
-  padding: min(12px, 1%);
+  padding: min(14px, 1.5%);
   margin: 0 auto;
   background: ${({ theme }) => hexToRgb(theme.blackDark, 0.4)};
   color: ${({ theme }) => hexToRgb(theme.whiteDark, 0.4)};

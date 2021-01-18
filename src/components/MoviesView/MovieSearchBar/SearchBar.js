@@ -81,9 +81,6 @@ export default function MovieSearchBar({ setSearchQuery, variants }) {
           options={yearOptions}
           placeholder="Year"
           onChange={setYear}
-          // TODO for arrow use an arrow svg wrapped in a motion.div
-          // arrowClosed={<motion.span animate={{ rotate: 180 }} />}
-          // arrowOpen={<motion.span animate={{ rotate: 0 }} />}
         />
       </form>
     </SearchWrapper>
