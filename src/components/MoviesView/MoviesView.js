@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import Loading from '../../reusables/Loading';
 import useFetch from '../../hooks/useFetch';
 import ErrorSVG from '../../reusables/Error';
@@ -75,6 +76,8 @@ export default function MoviesSearch() {
 
       return movieList;
     });
+
+    if (!initialState && pages > 1) toast.success('More results have been loaded');
   }, [JSON.stringify(newlyFetchedMovies)]);
 
   useEffect(() => {
