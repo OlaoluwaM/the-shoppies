@@ -29,6 +29,17 @@ export const NavWrapper = styled(motion.ul).attrs({
     align-items: center;
     height: 100%;
     cursor: pointer;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: font-weight 0.4s ease;
+      text-transform: lowercase;
+
+      &.active {
+        font-weight: var(--xBold);
+      }
+    }
   }
 `;
 
@@ -59,12 +70,16 @@ export const LogoWrapper = styled(motion.li)`
   }
 `;
 
-export const NominationsLink = styled(motion.li)`
+export const SearchPageLink = styled.li`
   margin-left: auto;
-  font-weight: var(--medium);
+  font-weight: var(--regular);
+`;
 
-  & + li {
-    margin-left: 5%;
+export const NominationsLink = styled.li`
+  margin: 0 4%;
+  font-weight: var(--regular);
+
+  & + li.theme-switch {
     flex-basis: auto;
 
     div {

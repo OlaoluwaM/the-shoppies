@@ -1,10 +1,11 @@
 import Moon from '../../reusables/Moon';
 
+import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { trophyVariant } from './NavVariants';
 import { m as motion, useAnimation } from 'framer-motion';
 import { default as ShoppiesTrophy } from '../../reusables/Trophy';
-import { Nav, NavWrapper, LogoWrapper, NominationsLink } from './NavStyles';
+import { Nav, NavWrapper, LogoWrapper, NominationsLink, SearchPageLink } from './NavStyles';
 
 function Logo() {
   const trophyControls = useAnimation();
@@ -42,7 +43,17 @@ export default function NavBar() {
       <NavWrapper>
         <Logo />
 
-        <NominationsLink className="nominations-link"> nominations</NominationsLink>
+        <SearchPageLink>
+          <NavLink activeClassName="active" exact to="/">
+            Search
+          </NavLink>
+        </SearchPageLink>
+
+        <NominationsLink className="nominations-link">
+          <NavLink activeClassName="active" to="/nominations">
+            nominations
+          </NavLink>
+        </NominationsLink>
 
         <li className="theme-switch">
           <Moon />
