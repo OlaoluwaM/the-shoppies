@@ -4,14 +4,12 @@ import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
 import './global.css';
-import { Toaster } from 'react-hot-toast';
 import { StrictMode } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <StrictMode>
     <Router>
-      <Toaster />
       <App />
     </Router>
   </StrictMode>,
